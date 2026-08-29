@@ -1,32 +1,21 @@
-import java.util.*;
-
 class Solution {
     public int[] nextGreaterElements(int[] nums) {
-
         int n = nums.length;
         int[] ans = new int[n];
+        Deque<Integer> stack = new ArrayDeque<>();
 
-        // Initially sabko -1
-        Arrays.fill(ans, -1);
-
-        Stack<Integer> st = new Stack<>();
-
-        // Circular array ko handle karne ke liye 2 baar traverse
-        for (int i = 0; i < 2 * n; i++) {
-
+        for (int i = 2 * n - 1; i >= 0; i--) {
             int idx = i % n;
 
-            // Current element stack ke top se greater hai
-            while (!st.isEmpty() && nums[st.peek()] < nums[idx]) {
-
-                int topIndex = st.pop();
-                ans[topIndex] = nums[idx];
+            while (!stack.isEmpty() && stack.peek() <= nums[idx]) {
+                stack.pop();
             }
 
-            // Sirf first traversal mein index push karna hai
             if (i < n) {
-                st.push(idx);
+                ans[idx] = stack.isEmpty() ? -1 : stack.peek();
             }
+
+            stack.push(nums[idx]);
         }
 
         return ans;
