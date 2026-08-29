@@ -29,7 +29,7 @@ class LRUCache {
 
         head.next = tail;
         tail.prev = head;
-    }
+    } 
 
     // Node ko front me add karo
     private void add(Node node) {
