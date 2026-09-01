@@ -24,10 +24,10 @@ class Solution {
                 if (used.contains(ch2)) {
                     return false;
                 }
-
+            }
                 mp.put(ch1, ch2);
                 used.add(ch2);
-            }
+            
         }
 
         return true;
