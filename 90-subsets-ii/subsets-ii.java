@@ -2,37 +2,34 @@ import java.util.*;
 
 class Solution {
     public List<List<Integer>> subsetsWithDup(int[] nums) {
-        
-        List<List<Integer>> ans = new ArrayList<>();
-        Arrays.sort(nums); // duplicates ko ek saath lane ke liye
-        
-        backtrack(0, nums, new ArrayList<>(), ans);
-        
-        return ans;
+   Arrays.sort(nums);
+   List<List<Integer>> res=new ArrayList<>();
+    List<Integer> current=new ArrayList<>();
+    subsequences(0,nums,current,res);
+    return res;
+   
     }
+       public void subsequences(int index,int nums[],List<Integer> current,List<List<Integer>> res){
+    //base case
+    if(index==nums.length){
+        res.add(new ArrayList<>(current));
+        return;
+    }
+    //include 
+    current.add(nums[index]);
+    //pick
+    subsequences(index+1,nums,current,res);
 
-    private void backtrack(int start, int[] nums, 
-                           List<Integer> current, 
-                           List<List<Integer>> ans) {
-        
-        // Har current subset ko answer me add karo
-        ans.add(new ArrayList<>(current));
-        
-        for (int i = start; i < nums.length; i++) {
-            
-            // Same recursion level par duplicate skip karo
-            if (i > start && nums[i] == nums[i - 1]) {
-                continue;
-            }
-            
-            // Choose
-            current.add(nums[i]);
-            
-            // Explore
-            backtrack(i + 1, nums, current, ans);
-            
-            // Unchoose (Backtrack)
-            current.remove(current.size() - 1);
-        }
-    }
+    //remove 
+    current.remove(current.size()-1);
+
+while((index+1)<nums.length && nums[index]==nums[index+1]){
+    index++;
+}
+
+    subsequences(index+1,nums,current,res);
+    
+
+
+   }
 }
