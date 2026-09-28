@@ -9,8 +9,10 @@ class Solution {
         }
         bestShell=arr[i]-bestBuy;
         if(bestShell>profit){
-            profit=arr[i]-bestBuy;
+            // profit=arr[i]-bestBuy;
+            profit=bestShell;
         }
+        bestShell=0;
       }
       return profit;
     }
