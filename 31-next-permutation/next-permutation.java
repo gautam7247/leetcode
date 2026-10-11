@@ -33,7 +33,7 @@ class Solution {
         }
 
         // Step 3: Find the next greater element
-        for (int i = n - 1; i > index; i--) {
+        for (int i = n - 1; i >= index; i--) {
             if (arr[i] > arr[index]) {
                 swap(arr, index, i);
                 break;
