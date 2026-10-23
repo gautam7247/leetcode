@@ -1,30 +1,31 @@
-import java.util.Stack;
-
 class StockSpanner {
-
-    // stack me {price, span} store karenge
-    Stack<int[]> st;
-
+    Stack<Integer>st;
+    int[] arr;
+    int n;
     public StockSpanner() {
-        st = new Stack<>();
+        st=new Stack<>();
+        arr=new int[10000];
+        n=0;
     }
-
+    
     public int next(int price) {
-
-        int span = 1;
-
-        // Jab tak previous price current price se chhota
-        // ya equal hai, uska span add kar do
-        while (!st.isEmpty() && st.peek()[0] <= price) {
-            span += st.pop()[1];
+        arr[n]=price;
+        while(st.size()>0 && arr[st.peek()]<=price){
+            st.pop();
         }
-
-        // Current price aur uska total span store karo
-        st.push(new int[]{price, span});
-
-        return span;
+        int res;
+        if(st.size()==0){
+            res=n+1;
+        }
+        else{
+            res=n-st.peek();
+        }
+        st.push(n);
+        n++;
+        return res;
     }
 }
+
 /**
  * Your StockSpanner object will be instantiated and called as such:
  * StockSpanner obj = new StockSpanner();
