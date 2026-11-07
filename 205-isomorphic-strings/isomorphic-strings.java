@@ -1,35 +1,29 @@
 class Solution {
     public boolean isIsomorphic(String s, String t) {
+        Map<Character,Character> mp=new HashMap<>();
+        Set<Character> mp1=new HashSet<>();
 
-        if (s.length() != t.length()) {
+        if(s.length()!=t.length()){
             return false;
         }
+        for(int i=0;i<s.length();i++){
+            char ch1=s.charAt(i);
+            char ch2=t.charAt(i);
 
-        HashMap<Character, Character> mp = new HashMap<>();
-        HashSet<Character> used = new HashSet<>();
-
-        for (int i = 0; i < s.length(); i++) {
-
-            char ch1 = s.charAt(i);
-            char ch2 = t.charAt(i);
-
-            if (mp.containsKey(ch1)) {
-
-                if (mp.get(ch1) != ch2) {
-                    return false;
-                }
-
-            } else {
-
-                if (used.contains(ch2)) {
+            if(mp.containsKey(ch1)){
+                 if(mp.get(ch1)!=ch2 ){
+                 return false;
+                 }
+              
+            }
+            else{
+                if(mp1.contains(ch2)){
                     return false;
                 }
             }
-                mp.put(ch1, ch2);
-                used.add(ch2);
-            
+            mp.put(ch1,ch2);
+            mp1.add(ch2);
         }
-
         return true;
     }
 }
